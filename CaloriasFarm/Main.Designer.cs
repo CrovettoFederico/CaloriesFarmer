@@ -130,7 +130,6 @@
             General_Group.TabStop = false;
             General_Group.Text = "Menu General";
             General_Group.Visible = false;
-            General_Group.Enter += groupBox1_Enter;
             // 
             // Añadir_Btn
             // 
@@ -179,6 +178,7 @@
             Ejercicio_Group.TabStop = false;
             Ejercicio_Group.Text = "Menu Ejercicio";
             Ejercicio_Group.Visible = false;
+            Ejercicio_Group.MouseCaptureChanged += Ejercicio_Group_MouseCaptureChanged;
             // 
             // GastoTotal_Txt
             // 
@@ -398,6 +398,7 @@
             Text = "Farmeando Calorias";
             Activated += Main_Activated;
             Load += Main_Load;
+            MouseClick += Main_MouseClick;
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             General_Group.ResumeLayout(false);

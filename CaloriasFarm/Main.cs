@@ -1,3 +1,5 @@
+using CaloriasFarm.Controllers;
+using CaloriasFarm.ErrorsHandler;
 using CaloriasFarm.Models;
 using CaloriasFarm.Utils;
 using System.ComponentModel;
@@ -6,42 +8,63 @@ namespace CaloriasFarm {
     public partial class Main : Form {
 
         private Point StartingPos = new Point(12, 45);
+        private SetearMetas MetasForm;
+        private ABMEjercicios ABMForm;
+        private MetasController Controller;
+
         public Main() {
             InitializeComponent();
-            Context.CargarContext();
-            Inicializar();
+            Controller = new MetasController(ErrorHandler.OnError);
+            Controller.IniciarPrograma();
+            InicializarVista();
+           
+        }
+        private void InicializarVista() {
+            RefrescarVista();
+
             General_Group.Visible = true;
             Ejercicio_Group.Visible = false;
             General_Group.Location = StartingPos;
-        }
-        private void Inicializar() {
 
+            MetasForm = new SetearMetas();
+            ABMForm = new ABMEjercicios();
+
+        }
+
+        private void RefrescarVista() {
             Ejercicio_Cmb.Refresh();
             Ejercicio_Cmb.DataSource = new BindingList<Ejercicio>(Context.Ejercicios);
             SetearBarras();
-        }
-
-
-        private void groupBox1_Enter(object sender, EventArgs e) {
-
+            this.Refresh();
         }
 
         private void General_Btn_Click(object sender, EventArgs e) {
+            AbrirGeneral();
+        }
+
+        private void AbrirGeneral() {
             General_Group.Visible = true;
             Ejercicio_Group.Visible = false;
             General_Group.Location = StartingPos;
         }
 
         private void Ejercicio_Btn_Click(object sender, EventArgs e) {
+            AbrirEjercicios();
+        }
+
+        private void AbrirEjercicios() {
             General_Group.Visible = false;
             Ejercicio_Group.Visible = true;
             Ejercicio_Group.Location = StartingPos;
         }
 
         private void Ejercicio_Cmb_SelectedIndexChanged(object sender, EventArgs e) {
-            Calorias_Txt.Text = ((ComboBox)sender).SelectedValue.ToString();
-            GastoTotal_Txt.Text = ((int)((ComboBox)sender).SelectedValue * Tiempo_Num.Value * 2).ToString();
+            CargarEjercicioElecto((ComboBox)sender);
+        }
 
+        private void CargarEjercicioElecto(ComboBox ComboEjercicios) {
+            Calorias_Txt.Text = ComboEjercicios.SelectedValue.ToString();
+            GastoTotal_Txt.Text = ((int)ComboEjercicios.SelectedValue * Tiempo_Num.Value * 2).ToString();
         }
 
         private void Tiempo_Num_ValueChanged(object sender, EventArgs e) {
@@ -74,12 +97,8 @@ namespace CaloriasFarm {
         }
 
         private void ActualizarCalorias(int Calorias) {
-            Context.Metas.ActualCalorias += Calorias;
-            if (Context.Metas.ActualCalorias >= 7700) {
-                Context.Metas.ActualCalorias -= 7700;
-                Context.Metas.ActualKilos++;
-            }
-            Context.GuardarContext();
+
+            Controller.ActualizarCalorias(Calorias);
             SetearBarras();
 
         }
@@ -97,19 +116,28 @@ namespace CaloriasFarm {
         }
 
         private void ABMEjercicios_Btn_Click(object sender, EventArgs e) {
-            ABMEjercicios frm = new ABMEjercicios();
-            frm.Show();
+            if (ABMForm == null || ABMForm.IsDisposed) ABMForm = new ABMEjercicios();
+            ABMForm.Show();
+            ABMForm.Select();
         }
 
 
         private void Main_Activated(object sender, EventArgs e) {
-            Inicializar();
-            this.Refresh();
+            RefrescarVista();
         }
 
         private void SetearMetas_Btn_Click(object sender, EventArgs e) {
-            SetearMetas frm = new SetearMetas();
-            frm.Show();
+            if (MetasForm == null || MetasForm.IsDisposed) MetasForm = new SetearMetas();
+            MetasForm.Show();
+            MetasForm.Select();
+        }
+
+        private void Main_MouseClick(object sender, MouseEventArgs e) {
+            Ejercicio_Group.Select();
+        }
+
+        private void Ejercicio_Group_MouseCaptureChanged(object sender, EventArgs e) {
+            Ejercicio_Group.Select();
         }
     }
 }
