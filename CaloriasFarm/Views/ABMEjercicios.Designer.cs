@@ -85,7 +85,9 @@
             ClientSize = new Size(333, 335);
             Controls.Add(Guardar_Btn);
             Controls.Add(Ejercicios_Grid);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
             Name = "ABMEjercicios";
             Text = "ABM Ejercicios";
             ((System.ComponentModel.ISupportInitialize)Ejercicios_Grid).EndInit();

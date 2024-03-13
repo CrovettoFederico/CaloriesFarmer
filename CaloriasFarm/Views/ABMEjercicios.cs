@@ -1,5 +1,4 @@
-﻿using CaloriasFarm.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CaloriasFarm.Models;
 using CaloriasFarm.Controllers;
+using CaloriasFarm.Utils.Context;
 
 namespace CaloriasFarm {
     public partial class ABMEjercicios : Form {
@@ -17,7 +17,7 @@ namespace CaloriasFarm {
 
         public ABMEjercicios() {
             InitializeComponent();
-            Controller = new EjerciciosController(ErrorsHandler.ErrorHandler.OnError);
+            Controller = new EjerciciosController(this, ErrorsHandler.ErrorHandler.OnError);
             Ejercicios_Grid.DataSource = new BindingList<Ejercicio>(Context.Ejercicios);
         }
 

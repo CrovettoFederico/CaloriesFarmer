@@ -1,7 +1,7 @@
 using CaloriasFarm.Controllers;
 using CaloriasFarm.ErrorsHandler;
 using CaloriasFarm.Models;
-using CaloriasFarm.Utils;
+using CaloriasFarm.Utils.Context;
 using System.ComponentModel;
 
 namespace CaloriasFarm {
@@ -11,13 +11,14 @@ namespace CaloriasFarm {
         private SetearMetas MetasForm;
         private ABMEjercicios ABMForm;
         private MetasController Controller;
+        private CargarDiaDeGym DiaGymForm;
 
         public Main() {
             InitializeComponent();
-            Controller = new MetasController(ErrorHandler.OnError);
+            Controller = new MetasController(this, ErrorHandler.OnError);
             Controller.IniciarPrograma();
             InicializarVista();
-           
+
         }
         private void InicializarVista() {
             RefrescarVista();
@@ -28,7 +29,6 @@ namespace CaloriasFarm {
 
             MetasForm = new SetearMetas();
             ABMForm = new ABMEjercicios();
-
         }
 
         private void RefrescarVista() {
@@ -138,6 +138,34 @@ namespace CaloriasFarm {
 
         private void Ejercicio_Group_MouseCaptureChanged(object sender, EventArgs e) {
             Ejercicio_Group.Select();
+        }
+
+        private void pechoToolStripMenuItem_Click(object sender, EventArgs e) {
+            MostrarCargarDiaGym(TiposDeRutina.Pecho);
+        }
+
+        private void piernasToolStripMenuItem_Click(object sender, EventArgs e) {
+            MostrarCargarDiaGym(TiposDeRutina.Piernas);
+        }
+
+        private void espaldaToolStripMenuItem_Click(object sender, EventArgs e) {
+            MostrarCargarDiaGym(TiposDeRutina.Espalda);
+        }
+
+        private void MostrarCargarDiaGym(TiposDeRutina Rutina) {
+            if (DiaGymForm == null || DiaGymForm.IsDisposed)
+                DiaGymForm = new CargarDiaDeGym(Rutina);
+
+            DiaGymForm.Show();
+            DiaGymForm.Select();
+
+            if (DiaGymForm.Text != Rutina.ToString())
+                MessageBox.Show("Ya esta cargando un dia de Gimnasio");
+
+        }
+
+        private void Mas_Tool_Click(object sender, EventArgs e) {
+
         }
     }
 }

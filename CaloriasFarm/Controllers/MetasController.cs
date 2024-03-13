@@ -1,17 +1,16 @@
 ﻿using CaloriasFarm.Models;
-using CaloriasFarm.Utils;
+using CaloriasFarm.Utils.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CaloriasFarm.Controllers {
-    public class MetasController {
-
-        private EventHandler<Exception> ExceptionHandler;
-
-        public MetasController(EventHandler<Exception> ErrorHandler) {
+namespace CaloriasFarm.Controllers
+{
+    public class MetasController : FormController {
+        public MetasController(Form form, EventHandler<Exception> ErrorHandler) {
+            _Form = form;
             ExceptionHandler += ErrorHandler;
         }
 

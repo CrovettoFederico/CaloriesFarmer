@@ -1,15 +1,16 @@
-﻿using CaloriasFarm.Utils;
+﻿using CaloriasFarm.Utils.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CaloriasFarm.Controllers {
-    public class EjerciciosController {
-        private EventHandler<Exception> ExceptionHandler;
-        public EjerciciosController(EventHandler<Exception> exceptionHanlder) {
-            ExceptionHandler += exceptionHanlder;
+namespace CaloriasFarm.Controllers
+{
+    public class EjerciciosController : FormController {
+        public EjerciciosController(Form form, EventHandler<Exception> ErrorHandler) {
+            _Form = form;
+            ExceptionHandler += ErrorHandler;
         }
 
         public bool GuardarEjercicios() {
@@ -17,7 +18,7 @@ namespace CaloriasFarm.Controllers {
                 ExceptionHandler.Invoke(null, new Exception("Ejercicios no puede ser Nulo al guardar. "));
                 return false;
             }
-
+            
             Context.GuardarContext();
 
             return true;

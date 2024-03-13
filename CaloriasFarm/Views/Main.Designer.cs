@@ -31,6 +31,10 @@
             Mas_Tool = new ToolStripDropDownButton();
             ABMEjercicios_Btn = new ToolStripMenuItem();
             SetearMetas_Btn = new ToolStripMenuItem();
+            cargarDiaDeGymToolStripMenuItem = new ToolStripMenuItem();
+            pechoToolStripMenuItem = new ToolStripMenuItem();
+            piernasToolStripMenuItem = new ToolStripMenuItem();
+            espaldaToolStripMenuItem = new ToolStripMenuItem();
             General_Group = new GroupBox();
             Añadir_Btn = new Button();
             Calorias_Num = new NumericUpDown();
@@ -97,26 +101,55 @@
             // Mas_Tool
             // 
             Mas_Tool.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            Mas_Tool.DropDownItems.AddRange(new ToolStripItem[] { ABMEjercicios_Btn, SetearMetas_Btn });
+            Mas_Tool.DropDownItems.AddRange(new ToolStripItem[] { ABMEjercicios_Btn, SetearMetas_Btn, cargarDiaDeGymToolStripMenuItem });
             Mas_Tool.Image = (Image)resources.GetObject("Mas_Tool.Image");
             Mas_Tool.ImageTransparentColor = Color.Magenta;
             Mas_Tool.Name = "Mas_Tool";
             Mas_Tool.Size = new Size(50, 24);
             Mas_Tool.Text = "Más";
+            Mas_Tool.Click += Mas_Tool_Click;
             // 
             // ABMEjercicios_Btn
             // 
             ABMEjercicios_Btn.Name = "ABMEjercicios_Btn";
-            ABMEjercicios_Btn.Size = new Size(213, 26);
+            ABMEjercicios_Btn.Size = new Size(224, 26);
             ABMEjercicios_Btn.Text = "ABM De Ejercicios";
             ABMEjercicios_Btn.Click += ABMEjercicios_Btn_Click;
             // 
             // SetearMetas_Btn
             // 
             SetearMetas_Btn.Name = "SetearMetas_Btn";
-            SetearMetas_Btn.Size = new Size(213, 26);
+            SetearMetas_Btn.Size = new Size(224, 26);
             SetearMetas_Btn.Text = "Setear Metas";
             SetearMetas_Btn.Click += SetearMetas_Btn_Click;
+            // 
+            // cargarDiaDeGymToolStripMenuItem
+            // 
+            cargarDiaDeGymToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { pechoToolStripMenuItem, piernasToolStripMenuItem, espaldaToolStripMenuItem });
+            cargarDiaDeGymToolStripMenuItem.Name = "cargarDiaDeGymToolStripMenuItem";
+            cargarDiaDeGymToolStripMenuItem.Size = new Size(224, 26);
+            cargarDiaDeGymToolStripMenuItem.Text = "Cargar Dia de Gym";
+            // 
+            // pechoToolStripMenuItem
+            // 
+            pechoToolStripMenuItem.Name = "pechoToolStripMenuItem";
+            pechoToolStripMenuItem.Size = new Size(144, 26);
+            pechoToolStripMenuItem.Text = "Pecho";
+            pechoToolStripMenuItem.Click += pechoToolStripMenuItem_Click;
+            // 
+            // piernasToolStripMenuItem
+            // 
+            piernasToolStripMenuItem.Name = "piernasToolStripMenuItem";
+            piernasToolStripMenuItem.Size = new Size(144, 26);
+            piernasToolStripMenuItem.Text = "Piernas";
+            piernasToolStripMenuItem.Click += piernasToolStripMenuItem_Click;
+            // 
+            // espaldaToolStripMenuItem
+            // 
+            espaldaToolStripMenuItem.Name = "espaldaToolStripMenuItem";
+            espaldaToolStripMenuItem.Size = new Size(144, 26);
+            espaldaToolStripMenuItem.Text = "Espalda";
+            espaldaToolStripMenuItem.Click += espaldaToolStripMenuItem_Click;
             // 
             // General_Group
             // 
@@ -445,5 +478,9 @@
         private ToolStripDropDownButton Mas_Tool;
         private ToolStripMenuItem ABMEjercicios_Btn;
         private ToolStripMenuItem SetearMetas_Btn;
+        private ToolStripMenuItem cargarDiaDeGymToolStripMenuItem;
+        private ToolStripMenuItem pechoToolStripMenuItem;
+        private ToolStripMenuItem piernasToolStripMenuItem;
+        private ToolStripMenuItem espaldaToolStripMenuItem;
     }
 }

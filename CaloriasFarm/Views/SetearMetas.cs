@@ -1,7 +1,7 @@
 ﻿using CaloriasFarm.Controllers;
 using CaloriasFarm.ErrorsHandler;
 using CaloriasFarm.Models;
-using CaloriasFarm.Utils;
+using CaloriasFarm.Utils.Context;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,7 +18,7 @@ namespace CaloriasFarm {
 
         public SetearMetas() {
             InitializeComponent();
-            metasController = new MetasController(ErrorHandler.OnError);
+            metasController = new MetasController(this, ErrorHandler.OnError);
             CargarCalorias();
         }
 
@@ -37,7 +37,7 @@ namespace CaloriasFarm {
                 TotalKilos = decimal.ToInt32(MetaKilos_Num.Value)
             });
 
-            if(guardar)
+            if (guardar)
                 MessageBox.Show("Metas Guardadas");
         }
     }
