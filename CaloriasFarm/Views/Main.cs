@@ -2,7 +2,9 @@ using CaloriasFarm.Controllers;
 using CaloriasFarm.ErrorsHandler;
 using CaloriasFarm.Models;
 using CaloriasFarm.Utils.Context;
+using CaloriasFarm.Views;
 using System.ComponentModel;
+using System.Reflection.Metadata.Ecma335;
 
 namespace CaloriasFarm {
     public partial class Main : Form {
@@ -12,6 +14,8 @@ namespace CaloriasFarm {
         private ABMEjercicios ABMForm;
         private MetasController Controller;
         private CargarDiaDeGym DiaGymForm;
+        private HistorialDeCargaCalorias HistorialForm;
+
 
         public Main() {
             InitializeComponent();
@@ -116,9 +120,7 @@ namespace CaloriasFarm {
         }
 
         private void ABMEjercicios_Btn_Click(object sender, EventArgs e) {
-            if (ABMForm == null || ABMForm.IsDisposed) ABMForm = new ABMEjercicios();
-            ABMForm.Show();
-            ABMForm.Select();
+            ABMForm = (ABMEjercicios)ShowForm<ABMEjercicios>(ABMForm);
         }
 
 
@@ -127,9 +129,7 @@ namespace CaloriasFarm {
         }
 
         private void SetearMetas_Btn_Click(object sender, EventArgs e) {
-            if (MetasForm == null || MetasForm.IsDisposed) MetasForm = new SetearMetas();
-            MetasForm.Show();
-            MetasForm.Select();
+           MetasForm = (SetearMetas)ShowForm<SetearMetas>(MetasForm);
         }
 
         private void Main_MouseClick(object sender, MouseEventArgs e) {
@@ -153,19 +153,32 @@ namespace CaloriasFarm {
         }
 
         private void MostrarCargarDiaGym(TiposDeRutina Rutina) {
+            DiaGymForm = (CargarDiaDeGym)ShowForm<CargarDiaDeGym>(DiaGymForm, Rutina);
+
+            /*
             if (DiaGymForm == null || DiaGymForm.IsDisposed)
                 DiaGymForm = new CargarDiaDeGym(Rutina);
 
             DiaGymForm.Show();
             DiaGymForm.Select();
+            */
 
             if (DiaGymForm.Text != Rutina.ToString())
                 MessageBox.Show("Ya esta cargando un dia de Gimnasio");
 
         }
 
-        private void Mas_Tool_Click(object sender, EventArgs e) {
+        private Form ShowForm<T>(Form form, object Args = null) {
+            if (form == null || form.IsDisposed) 
+                form = Args!=null ? (Form)Activator.CreateInstance(typeof(T), Args) : (Form)Activator.CreateInstance(typeof(T));
+            form.Show();
+            form.Select();
 
+            return form;
+        }
+
+        private void historialToolStripMenuItem_Click(object sender, EventArgs e) {
+            HistorialForm = (HistorialDeCargaCalorias) ShowForm<HistorialDeCargaCalorias>(HistorialForm);            
         }
     }
 }
