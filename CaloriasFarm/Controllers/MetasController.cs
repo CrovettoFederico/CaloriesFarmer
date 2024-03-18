@@ -9,9 +9,7 @@ using System.Threading.Tasks;
 namespace CaloriasFarm.Controllers
 {
     public class MetasController : FormController {
-        public MetasController(Form form, EventHandler<Exception> ErrorHandler) {
-            _Form = form;
-            ExceptionHandler += ErrorHandler;
+        public MetasController(Form form, EventHandler<Exception> ErrorHandler) : base(form, ErrorHandler){
         }
 
         public void IniciarPrograma() {
@@ -35,7 +33,7 @@ namespace CaloriasFarm.Controllers
                 return false;
             }
             return true;
-        }
+        }        
 
         public bool ActualizarCalorias(int Calorias) {
             try {

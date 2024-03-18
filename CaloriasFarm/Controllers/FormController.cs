@@ -8,5 +8,10 @@ namespace CaloriasFarm.Controllers {
     public abstract class FormController {
         internal EventHandler<Exception> ExceptionHandler { get; set; }
         internal Form _Form { get; set; }
+
+        internal FormController(Form form, EventHandler<Exception> ErrorHandler) {
+            _Form = form;
+            ExceptionHandler += ErrorHandler;
+        }
     }
 }

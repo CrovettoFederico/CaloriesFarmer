@@ -8,9 +8,7 @@ using System.Threading.Tasks;
 namespace CaloriasFarm.Controllers
 {
     public class EjerciciosController : FormController {
-        public EjerciciosController(Form form, EventHandler<Exception> ErrorHandler) {
-            _Form = form;
-            ExceptionHandler += ErrorHandler;
+        public EjerciciosController(Form form, EventHandler<Exception> ErrorHandler) : base(form, ErrorHandler) {            
         }
 
         public bool GuardarEjercicios() {

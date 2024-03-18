@@ -1,25 +1,27 @@
 ﻿using CaloriasFarm.Models;
 using CaloriasFarm.Utils.Files;
 using CaloriasFarm.Utils.ModelHandlers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CaloriasFarm.Controllers {
     public class CargarDiaGymController : FormController {
-        new CargarDiaDeGym _Form;
-        private ABMObjetosDesdeArchivo _RutinaGymHandler;
 
-        public CargarDiaGymController(CargarDiaDeGym form, EventHandler<Exception> ErrorHandler, ABMObjetosDesdeArchivo RutinaGymHandler = null) {
+        // Como hago para no tener que pisarlo aca, y que igual me lo tome?
+        // O es al pedo tener Form en el abstract? 
+        new CargarDiaDeGym _Form;
+        private ABMObjetos _RutinaGymHandler;
+
+        // Quien tiene la responsabilidad de saber cual es el Handler (O Modelo) ??
+        // La vista deberia crear el objeto RutinaGymHandler, o el controller se encarga de eso?
+        // Si lo hace la vista, porque la vista conoce el modelo?
+        // Si lo hace el controller no respeto la inversion de dependencia
+        // siendo yo el cliente del modelo, deberia respetar la inversion de dependencia?
+        // La vista es el cliente del controller. El controller el cliente del modelo. 
+        public CargarDiaGymController(CargarDiaDeGym form, EventHandler<Exception> ErrorHandler, ABMObjetos? RutinaGymHandler = null) : base(form, ErrorHandler) {
             _Form = form;
-            ExceptionHandler += ErrorHandler;
             if (RutinaGymHandler != null)
                 _RutinaGymHandler = RutinaGymHandler;
             else
-                _RutinaGymHandler = new RutinaGymHandler();
+                _RutinaGymHandler = new RutinaGymHandler(new ExcelHandler());
         }
 
         public bool GuardarDiaDeGym() {

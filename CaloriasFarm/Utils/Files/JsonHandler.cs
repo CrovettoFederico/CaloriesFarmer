@@ -6,7 +6,7 @@ namespace CaloriasFarm.Utils.Files{
 
         public object ReadFile<T>(string JsonFile){
             string file = File.ReadAllText(JsonFile);
-            return JsonConvert.DeserializeObject<T>(file);
+            return JsonConvert.DeserializeObject<T>(file)!;
         }
         
         public void WriteFile<T>(string JsonFile, T obj){

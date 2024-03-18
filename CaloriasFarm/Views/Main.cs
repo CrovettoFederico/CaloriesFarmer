@@ -155,14 +155,6 @@ namespace CaloriasFarm {
         private void MostrarCargarDiaGym(TiposDeRutina Rutina) {
             DiaGymForm = (CargarDiaDeGym)ShowForm<CargarDiaDeGym>(DiaGymForm, Rutina);
 
-            /*
-            if (DiaGymForm == null || DiaGymForm.IsDisposed)
-                DiaGymForm = new CargarDiaDeGym(Rutina);
-
-            DiaGymForm.Show();
-            DiaGymForm.Select();
-            */
-
             if (DiaGymForm.Text != Rutina.ToString())
                 MessageBox.Show("Ya esta cargando un dia de Gimnasio");
 
@@ -170,7 +162,7 @@ namespace CaloriasFarm {
 
         private Form ShowForm<T>(Form form, object Args = null) {
             if (form == null || form.IsDisposed) 
-                form = Args!=null ? (Form)Activator.CreateInstance(typeof(T), Args) : (Form)Activator.CreateInstance(typeof(T));
+                form = Args != null ? (Form)Activator.CreateInstance(typeof(T), Args) : (Form)Activator.CreateInstance(typeof(T));
             form.Show();
             form.Select();
 

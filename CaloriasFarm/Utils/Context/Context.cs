@@ -11,7 +11,6 @@ namespace CaloriasFarm.Utils.Context{
         public static Metas Metas { get; private set; }
         public static List<Rutina> Rutinas { get; private set; }
 
-        //private static readonly IContextHandler contextHandler = new ContextHandler();
         private static readonly IContextHandler contextHandler = new ContextHandler(
             new EjercicioHandler(new JsonHandler()),
             new MetasHandler(new JsonHandler()),   

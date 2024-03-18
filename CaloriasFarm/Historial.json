@@ -1,0 +1,10 @@
+[
+	{
+		"Dia":"2024-03-16",
+		"CausaYCaloriasList":{"Ejercicio1":100, "Ejercicio2":200, "Ejercicio3":300}
+	},
+	{
+		"Dia":"2024-03-15",
+		"CausaYCaloriasList":{"General":100, "Ejercicio2":200, "Ejercicio3":300}
+	}
+]

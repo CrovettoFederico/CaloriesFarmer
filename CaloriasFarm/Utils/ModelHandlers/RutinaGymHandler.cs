@@ -19,12 +19,9 @@ namespace CaloriasFarm.Utils.ModelHandlers
         private readonly string ColumnaPtsGym = "J";
         internal override FileHandler _FileHandler { get; set; }
 
-        public RutinaGymHandler(FileHandler fileHandler = null) {
-            if (fileHandler != null)
-                _FileHandler = fileHandler;
-            else
-                _FileHandler = new ExcelHandler();
+        public RutinaGymHandler(FileHandler fileHandler) {
 
+            _FileHandler = fileHandler;
 
             Archivo = (ExcelPackage)_FileHandler.ReadFile<ExcelPackage>(RutinaGymFile);
         }
@@ -44,10 +41,13 @@ namespace CaloriasFarm.Utils.ModelHandlers
 
                 while (true) {
                     try {
-                        string Ejercicio = Hoja.Cells["A" + Fila].Value.ToString();
-                        if (!string.IsNullOrEmpty(Ejercicio)) {
-                            RutinaActual.EjerciciosGym.Add(Ejercicio);
-                            Fila += FilasEntreEjercicios;
+                        if (Hoja.Cells["A" + Fila].Value != null) {
+                            string Ejercicio = Hoja.Cells["A" + Fila].Value.ToString();
+                            if (!string.IsNullOrEmpty(Ejercicio)) {
+                                RutinaActual.EjerciciosGym.Add(Ejercicio);
+                                Fila += FilasEntreEjercicios;
+                            } else
+                                break;                            
                         } else
                             break;
                     } catch {

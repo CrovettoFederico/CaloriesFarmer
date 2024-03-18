@@ -21,7 +21,7 @@ namespace CaloriasFarm.Utils.ModelHandlers
             _FileHandler.WriteFile(EjercicioJsonFile, (List<Ejercicio>)Ejercicio);
         }
         public override object Obtener() {
-            return _FileHandler.ReadFile<List<Ejercicio>>(EjercicioJsonFile);
+            return _FileHandler.ReadFile<List<Ejercicio>>(EjercicioJsonFile)!;
         }
     }
 }

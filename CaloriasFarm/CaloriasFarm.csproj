@@ -10,6 +10,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Ejercicios.json" />
+    <None Remove="Historial.json" />
+    <None Remove="Metas.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Ejercicios.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Historial.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Metas.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Utils\Attack.ico" />
   </ItemGroup>
 
