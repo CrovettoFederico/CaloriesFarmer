@@ -16,7 +16,7 @@ namespace CaloriasFarm.Utils.ModelHandlers
             _FileHandler = fileHandler;
         }
 
-        private readonly string MetasJsonFile = Directory.GetCurrentDirectory() + "\\Metas.json";
+        private readonly string MetasJsonFile = Directory.GetCurrentDirectory() + "\\Files\\Metas.json";
 
         public override object Obtener()
         {

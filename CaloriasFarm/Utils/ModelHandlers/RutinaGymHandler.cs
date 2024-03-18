@@ -12,7 +12,7 @@ namespace CaloriasFarm.Utils.ModelHandlers
 {
     public class RutinaGymHandler : ABMObjetosDesdeArchivo, IDisposable {
         private ExcelPackage Archivo;
-        private readonly string RutinaGymFile = Directory.GetCurrentDirectory() + "\\RutinaGym.xlsx";
+        private readonly string RutinaGymFile = Directory.GetCurrentDirectory() + "\\Files\\RutinaGym.xlsx";
         private readonly int FilasEntreEjercicios = 3;
         private readonly string SeparadorDeSemana = "-";
         private readonly string Abecedario = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

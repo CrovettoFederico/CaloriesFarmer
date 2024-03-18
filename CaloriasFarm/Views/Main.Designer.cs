@@ -31,6 +31,7 @@
             Mas_Tool = new ToolStripDropDownButton();
             ABMEjercicios_Btn = new ToolStripMenuItem();
             SetearMetas_Btn = new ToolStripMenuItem();
+            historialToolStripMenuItem = new ToolStripMenuItem();
             cargarDiaDeGymToolStripMenuItem = new ToolStripMenuItem();
             pechoToolStripMenuItem = new ToolStripMenuItem();
             piernasToolStripMenuItem = new ToolStripMenuItem();
@@ -48,8 +49,9 @@
             Tiempo_Num = new NumericUpDown();
             Tiempo_Lbl = new Label();
             Ejercicio_Cmb = new ComboBox();
-            ejercicioBindingSource = new BindingSource(components);
+            ejercicioBindingSource1 = new BindingSource(components);
             Ejercicio_Lbl = new Label();
+            ejercicioBindingSource = new BindingSource(components);
             Calorias_Bar = new ProgressBar();
             Kilos_Bar = new ProgressBar();
             label1 = new Label();
@@ -60,12 +62,13 @@
             KilosMax_Bar_Lbl = new Label();
             CaloriasBar_Lbl = new Label();
             KilosBar_Lbl = new Label();
-            historialToolStripMenuItem = new ToolStripMenuItem();
+            cb_Ayer = new CheckBox();
             toolStrip1.SuspendLayout();
             General_Group.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Calorias_Num).BeginInit();
             Ejercicio_Group.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Tiempo_Num).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ejercicioBindingSource1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ejercicioBindingSource).BeginInit();
             SuspendLayout();
             // 
@@ -75,7 +78,7 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { General_Btn, Ejercicio_Btn, Mas_Tool });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(393, 25);
+            toolStrip1.Size = new Size(449, 27);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -85,7 +88,7 @@
             General_Btn.Image = (Image)resources.GetObject("General_Btn.Image");
             General_Btn.ImageTransparentColor = Color.Magenta;
             General_Btn.Name = "General_Btn";
-            General_Btn.Size = new Size(51, 22);
+            General_Btn.Size = new Size(64, 24);
             General_Btn.Text = "General";
             General_Btn.Click += General_Btn_Click;
             // 
@@ -95,7 +98,7 @@
             Ejercicio_Btn.Image = (Image)resources.GetObject("Ejercicio_Btn.Image");
             Ejercicio_Btn.ImageTransparentColor = Color.Magenta;
             Ejercicio_Btn.Name = "Ejercicio_Btn";
-            Ejercicio_Btn.Size = new Size(55, 22);
+            Ejercicio_Btn.Size = new Size(69, 24);
             Ejercicio_Btn.Text = "Ejercicio";
             Ejercicio_Btn.Click += Ejercicio_Btn_Click;
             // 
@@ -106,48 +109,55 @@
             Mas_Tool.Image = (Image)resources.GetObject("Mas_Tool.Image");
             Mas_Tool.ImageTransparentColor = Color.Magenta;
             Mas_Tool.Name = "Mas_Tool";
-            Mas_Tool.Size = new Size(42, 22);
+            Mas_Tool.Size = new Size(50, 24);
             Mas_Tool.Text = "Más";
             // 
             // ABMEjercicios_Btn
             // 
             ABMEjercicios_Btn.Name = "ABMEjercicios_Btn";
-            ABMEjercicios_Btn.Size = new Size(180, 22);
+            ABMEjercicios_Btn.Size = new Size(218, 26);
             ABMEjercicios_Btn.Text = "ABM De Ejercicios";
             ABMEjercicios_Btn.Click += ABMEjercicios_Btn_Click;
             // 
             // SetearMetas_Btn
             // 
             SetearMetas_Btn.Name = "SetearMetas_Btn";
-            SetearMetas_Btn.Size = new Size(180, 22);
+            SetearMetas_Btn.Size = new Size(218, 26);
             SetearMetas_Btn.Text = "Setear Metas";
             SetearMetas_Btn.Click += SetearMetas_Btn_Click;
+            // 
+            // historialToolStripMenuItem
+            // 
+            historialToolStripMenuItem.Name = "historialToolStripMenuItem";
+            historialToolStripMenuItem.Size = new Size(218, 26);
+            historialToolStripMenuItem.Text = "Historial";
+            historialToolStripMenuItem.Click += historialToolStripMenuItem_Click;
             // 
             // cargarDiaDeGymToolStripMenuItem
             // 
             cargarDiaDeGymToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { pechoToolStripMenuItem, piernasToolStripMenuItem, espaldaToolStripMenuItem });
             cargarDiaDeGymToolStripMenuItem.Name = "cargarDiaDeGymToolStripMenuItem";
-            cargarDiaDeGymToolStripMenuItem.Size = new Size(180, 22);
+            cargarDiaDeGymToolStripMenuItem.Size = new Size(218, 26);
             cargarDiaDeGymToolStripMenuItem.Text = "Cargar Dia de Gym";
             // 
             // pechoToolStripMenuItem
             // 
             pechoToolStripMenuItem.Name = "pechoToolStripMenuItem";
-            pechoToolStripMenuItem.Size = new Size(114, 22);
+            pechoToolStripMenuItem.Size = new Size(144, 26);
             pechoToolStripMenuItem.Text = "Pecho";
             pechoToolStripMenuItem.Click += pechoToolStripMenuItem_Click;
             // 
             // piernasToolStripMenuItem
             // 
             piernasToolStripMenuItem.Name = "piernasToolStripMenuItem";
-            piernasToolStripMenuItem.Size = new Size(114, 22);
+            piernasToolStripMenuItem.Size = new Size(144, 26);
             piernasToolStripMenuItem.Text = "Piernas";
             piernasToolStripMenuItem.Click += piernasToolStripMenuItem_Click;
             // 
             // espaldaToolStripMenuItem
             // 
             espaldaToolStripMenuItem.Name = "espaldaToolStripMenuItem";
-            espaldaToolStripMenuItem.Size = new Size(114, 22);
+            espaldaToolStripMenuItem.Size = new Size(144, 26);
             espaldaToolStripMenuItem.Text = "Espalda";
             espaldaToolStripMenuItem.Click += espaldaToolStripMenuItem_Click;
             // 
@@ -156,11 +166,9 @@
             General_Group.Controls.Add(Añadir_Btn);
             General_Group.Controls.Add(Calorias_Num);
             General_Group.Controls.Add(Calorias_Lbl);
-            General_Group.Location = new Point(16, 22);
-            General_Group.Margin = new Padding(3, 2, 3, 2);
+            General_Group.Location = new Point(18, 29);
             General_Group.Name = "General_Group";
-            General_Group.Padding = new Padding(3, 2, 3, 2);
-            General_Group.Size = new Size(325, 98);
+            General_Group.Size = new Size(371, 131);
             General_Group.TabIndex = 1;
             General_Group.TabStop = false;
             General_Group.Text = "Menu General";
@@ -168,10 +176,9 @@
             // 
             // Añadir_Btn
             // 
-            Añadir_Btn.Location = new Point(178, 36);
-            Añadir_Btn.Margin = new Padding(3, 2, 3, 2);
+            Añadir_Btn.Location = new Point(203, 48);
             Añadir_Btn.Name = "Añadir_Btn";
-            Añadir_Btn.Size = new Size(82, 31);
+            Añadir_Btn.Size = new Size(94, 41);
             Añadir_Btn.TabIndex = 3;
             Añadir_Btn.Text = "Añadir";
             Añadir_Btn.UseVisualStyleBackColor = true;
@@ -180,20 +187,19 @@
             // Calorias_Num
             // 
             Calorias_Num.Increment = new decimal(new int[] { 10, 0, 0, 0 });
-            Calorias_Num.Location = new Point(17, 41);
-            Calorias_Num.Margin = new Padding(3, 2, 3, 2);
+            Calorias_Num.Location = new Point(19, 55);
             Calorias_Num.Maximum = new decimal(new int[] { 99999, 0, 0, 0 });
             Calorias_Num.Name = "Calorias_Num";
-            Calorias_Num.Size = new Size(105, 23);
+            Calorias_Num.Size = new Size(120, 27);
             Calorias_Num.TabIndex = 2;
             Calorias_Num.KeyPress += Calorias_Num_KeyPress;
             // 
             // Calorias_Lbl
             // 
             Calorias_Lbl.AutoSize = true;
-            Calorias_Lbl.Location = new Point(17, 24);
+            Calorias_Lbl.Location = new Point(19, 32);
             Calorias_Lbl.Name = "Calorias_Lbl";
-            Calorias_Lbl.Size = new Size(49, 15);
+            Calorias_Lbl.Size = new Size(62, 20);
             Calorias_Lbl.TabIndex = 0;
             Calorias_Lbl.Text = "Calorias";
             // 
@@ -208,11 +214,9 @@
             Ejercicio_Group.Controls.Add(Tiempo_Lbl);
             Ejercicio_Group.Controls.Add(Ejercicio_Cmb);
             Ejercicio_Group.Controls.Add(Ejercicio_Lbl);
-            Ejercicio_Group.Location = new Point(10, 69);
-            Ejercicio_Group.Margin = new Padding(3, 2, 3, 2);
+            Ejercicio_Group.Location = new Point(11, 54);
             Ejercicio_Group.Name = "Ejercicio_Group";
-            Ejercicio_Group.Padding = new Padding(3, 2, 3, 2);
-            Ejercicio_Group.Size = new Size(372, 210);
+            Ejercicio_Group.Size = new Size(425, 280);
             Ejercicio_Group.TabIndex = 3;
             Ejercicio_Group.TabStop = false;
             Ejercicio_Group.Text = "Menu Ejercicio";
@@ -223,28 +227,27 @@
             // 
             GastoTotal_Txt.AutoSize = true;
             GastoTotal_Txt.BackColor = Color.GhostWhite;
-            GastoTotal_Txt.Location = new Point(221, 106);
-            GastoTotal_Txt.MinimumSize = new Size(115, 20);
+            GastoTotal_Txt.Location = new Point(253, 141);
+            GastoTotal_Txt.MinimumSize = new Size(131, 27);
             GastoTotal_Txt.Name = "GastoTotal_Txt";
-            GastoTotal_Txt.Size = new Size(115, 20);
+            GastoTotal_Txt.Size = new Size(131, 27);
             GastoTotal_Txt.TabIndex = 10;
             // 
             // Calorias_Txt
             // 
             Calorias_Txt.AutoSize = true;
             Calorias_Txt.BackColor = Color.GhostWhite;
-            Calorias_Txt.Location = new Point(17, 106);
-            Calorias_Txt.MinimumSize = new Size(132, 20);
+            Calorias_Txt.Location = new Point(19, 141);
+            Calorias_Txt.MinimumSize = new Size(151, 27);
             Calorias_Txt.Name = "Calorias_Txt";
-            Calorias_Txt.Size = new Size(132, 20);
+            Calorias_Txt.Size = new Size(151, 27);
             Calorias_Txt.TabIndex = 9;
             // 
             // Añadir_Ejercicio_Btn
             // 
-            Añadir_Ejercicio_Btn.Location = new Point(138, 146);
-            Añadir_Ejercicio_Btn.Margin = new Padding(3, 2, 3, 2);
+            Añadir_Ejercicio_Btn.Location = new Point(158, 195);
             Añadir_Ejercicio_Btn.Name = "Añadir_Ejercicio_Btn";
-            Añadir_Ejercicio_Btn.Size = new Size(96, 40);
+            Añadir_Ejercicio_Btn.Size = new Size(110, 53);
             Añadir_Ejercicio_Btn.TabIndex = 8;
             Añadir_Ejercicio_Btn.Text = "Añadir";
             Añadir_Ejercicio_Btn.UseVisualStyleBackColor = true;
@@ -253,18 +256,18 @@
             // Totales_Lbl
             // 
             Totales_Lbl.AutoSize = true;
-            Totales_Lbl.Location = new Point(221, 85);
+            Totales_Lbl.Location = new Point(253, 113);
             Totales_Lbl.Name = "Totales_Lbl";
-            Totales_Lbl.Size = new Size(65, 15);
+            Totales_Lbl.Size = new Size(84, 20);
             Totales_Lbl.TabIndex = 6;
             Totales_Lbl.Text = "Gasto Total";
             // 
             // CaloriasEjercicio_Lbl
             // 
             CaloriasEjercicio_Lbl.AutoSize = true;
-            CaloriasEjercicio_Lbl.Location = new Point(17, 85);
+            CaloriasEjercicio_Lbl.Location = new Point(19, 113);
             CaloriasEjercicio_Lbl.Name = "CaloriasEjercicio_Lbl";
-            CaloriasEjercicio_Lbl.Size = new Size(96, 15);
+            CaloriasEjercicio_Lbl.Size = new Size(121, 20);
             CaloriasEjercicio_Lbl.TabIndex = 4;
             CaloriasEjercicio_Lbl.Text = "Calorias (30 Min)";
             // 
@@ -273,10 +276,9 @@
             Tiempo_Num.DecimalPlaces = 1;
             Tiempo_Num.ImeMode = ImeMode.On;
             Tiempo_Num.Increment = new decimal(new int[] { 5, 0, 0, 65536 });
-            Tiempo_Num.Location = new Point(221, 48);
-            Tiempo_Num.Margin = new Padding(3, 2, 3, 2);
+            Tiempo_Num.Location = new Point(253, 64);
             Tiempo_Num.Name = "Tiempo_Num";
-            Tiempo_Num.Size = new Size(91, 23);
+            Tiempo_Num.Size = new Size(104, 27);
             Tiempo_Num.TabIndex = 3;
             Tiempo_Num.ValueChanged += Tiempo_Num_ValueChanged;
             Tiempo_Num.KeyPress += Tiempo_Num_KeyPress;
@@ -284,9 +286,9 @@
             // Tiempo_Lbl
             // 
             Tiempo_Lbl.AutoSize = true;
-            Tiempo_Lbl.Location = new Point(221, 30);
+            Tiempo_Lbl.Location = new Point(253, 40);
             Tiempo_Lbl.Name = "Tiempo_Lbl";
-            Tiempo_Lbl.Size = new Size(72, 15);
+            Tiempo_Lbl.Size = new Size(91, 20);
             Tiempo_Lbl.TabIndex = 2;
             Tiempo_Lbl.Text = "Tiempo (Hs)";
             // 
@@ -294,99 +296,100 @@
             // 
             Ejercicio_Cmb.AutoCompleteCustomSource.AddRange(new string[] { "1", "2", "3", "4" });
             Ejercicio_Cmb.AutoCompleteMode = AutoCompleteMode.Suggest;
-            Ejercicio_Cmb.DataSource = ejercicioBindingSource;
+            Ejercicio_Cmb.DataSource = ejercicioBindingSource1;
             Ejercicio_Cmb.DisplayMember = "Nombre";
             Ejercicio_Cmb.FormattingEnabled = true;
-            Ejercicio_Cmb.Location = new Point(17, 47);
-            Ejercicio_Cmb.Margin = new Padding(3, 2, 3, 2);
+            Ejercicio_Cmb.Location = new Point(19, 63);
             Ejercicio_Cmb.Name = "Ejercicio_Cmb";
-            Ejercicio_Cmb.Size = new Size(133, 23);
+            Ejercicio_Cmb.Size = new Size(151, 28);
             Ejercicio_Cmb.TabIndex = 1;
             Ejercicio_Cmb.ValueMember = "Calorias";
             Ejercicio_Cmb.SelectedIndexChanged += Ejercicio_Cmb_SelectedIndexChanged;
             // 
+            // ejercicioBindingSource1
+            // 
+            ejercicioBindingSource1.DataSource = typeof(Models.Ejercicio);
+            // 
             // Ejercicio_Lbl
             // 
             Ejercicio_Lbl.AutoSize = true;
-            Ejercicio_Lbl.Location = new Point(17, 30);
+            Ejercicio_Lbl.Location = new Point(19, 40);
             Ejercicio_Lbl.Name = "Ejercicio_Lbl";
-            Ejercicio_Lbl.Size = new Size(51, 15);
+            Ejercicio_Lbl.Size = new Size(65, 20);
             Ejercicio_Lbl.TabIndex = 0;
             Ejercicio_Lbl.Text = "Ejercicio";
             // 
             // Calorias_Bar
             // 
             Calorias_Bar.ForeColor = SystemColors.ActiveCaptionText;
-            Calorias_Bar.Location = new Point(10, 309);
-            Calorias_Bar.Margin = new Padding(3, 2, 3, 2);
+            Calorias_Bar.Location = new Point(11, 412);
             Calorias_Bar.Maximum = 7700;
             Calorias_Bar.Name = "Calorias_Bar";
-            Calorias_Bar.Size = new Size(372, 22);
+            Calorias_Bar.Size = new Size(425, 29);
             Calorias_Bar.TabIndex = 2;
             Calorias_Bar.Value = 2000;
             // 
             // Kilos_Bar
             // 
-            Kilos_Bar.Location = new Point(10, 378);
-            Kilos_Bar.Margin = new Padding(3, 2, 3, 2);
+            Kilos_Bar.Location = new Point(11, 504);
             Kilos_Bar.Maximum = 5;
             Kilos_Bar.Name = "Kilos_Bar";
-            Kilos_Bar.Size = new Size(372, 22);
+            Kilos_Bar.Size = new Size(425, 29);
             Kilos_Bar.TabIndex = 4;
             Kilos_Bar.Value = 4;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(143, 292);
+            label1.Location = new Point(163, 389);
             label1.Name = "label1";
-            label1.Size = new Size(93, 15);
+            label1.Size = new Size(119, 20);
             label1.TabIndex = 5;
             label1.Text = "Calorias por Kilo";
             // 
             // CaloriasMin_Bar_Lbl
             // 
             CaloriasMin_Bar_Lbl.AutoSize = true;
-            CaloriasMin_Bar_Lbl.Location = new Point(10, 333);
+            CaloriasMin_Bar_Lbl.Location = new Point(11, 444);
             CaloriasMin_Bar_Lbl.Name = "CaloriasMin_Bar_Lbl";
-            CaloriasMin_Bar_Lbl.Size = new Size(13, 15);
+            CaloriasMin_Bar_Lbl.Size = new Size(17, 20);
             CaloriasMin_Bar_Lbl.TabIndex = 6;
             CaloriasMin_Bar_Lbl.Text = "0";
             // 
             // CaloriasMax_Bar_Lbl
             // 
             CaloriasMax_Bar_Lbl.AutoSize = true;
-            CaloriasMax_Bar_Lbl.Location = new Point(346, 333);
+            CaloriasMax_Bar_Lbl.Location = new Point(395, 444);
             CaloriasMax_Bar_Lbl.Name = "CaloriasMax_Bar_Lbl";
-            CaloriasMax_Bar_Lbl.Size = new Size(31, 15);
+            CaloriasMax_Bar_Lbl.Size = new Size(41, 20);
             CaloriasMax_Bar_Lbl.TabIndex = 7;
             CaloriasMax_Bar_Lbl.Text = "7700";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(174, 361);
+            label4.Location = new Point(199, 481);
             label4.Name = "label4";
-            label4.Size = new Size(32, 15);
+            label4.Size = new Size(41, 20);
             label4.TabIndex = 8;
             label4.Text = "Kilos";
             // 
             // KilosMin_Bar_Lbl
             // 
             KilosMin_Bar_Lbl.AutoSize = true;
-            KilosMin_Bar_Lbl.Location = new Point(10, 402);
+            KilosMin_Bar_Lbl.Location = new Point(11, 536);
             KilosMin_Bar_Lbl.Name = "KilosMin_Bar_Lbl";
-            KilosMin_Bar_Lbl.Size = new Size(13, 15);
+            KilosMin_Bar_Lbl.Size = new Size(17, 20);
             KilosMin_Bar_Lbl.TabIndex = 9;
             KilosMin_Bar_Lbl.Text = "0";
             // 
             // KilosMax_Bar_Lbl
             // 
             KilosMax_Bar_Lbl.AutoSize = true;
-            KilosMax_Bar_Lbl.Location = new Point(368, 402);
+            KilosMax_Bar_Lbl.Location = new Point(421, 536);
             KilosMax_Bar_Lbl.Name = "KilosMax_Bar_Lbl";
             KilosMax_Bar_Lbl.RightToLeft = RightToLeft.Yes;
-            KilosMax_Bar_Lbl.Size = new Size(13, 15);
+            KilosMax_Bar_Lbl.Size = new Size(17, 20);
             KilosMax_Bar_Lbl.TabIndex = 10;
             KilosMax_Bar_Lbl.Text = "5";
             // 
@@ -395,10 +398,10 @@
             CaloriasBar_Lbl.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             CaloriasBar_Lbl.AutoSize = true;
             CaloriasBar_Lbl.BackColor = Color.Transparent;
-            CaloriasBar_Lbl.Location = new Point(174, 333);
-            CaloriasBar_Lbl.MinimumSize = new Size(36, 15);
+            CaloriasBar_Lbl.Location = new Point(199, 444);
+            CaloriasBar_Lbl.MinimumSize = new Size(41, 20);
             CaloriasBar_Lbl.Name = "CaloriasBar_Lbl";
-            CaloriasBar_Lbl.Size = new Size(36, 15);
+            CaloriasBar_Lbl.Size = new Size(41, 20);
             CaloriasBar_Lbl.TabIndex = 11;
             CaloriasBar_Lbl.Text = "1000";
             CaloriasBar_Lbl.TextAlign = ContentAlignment.MiddleCenter;
@@ -408,26 +411,30 @@
             KilosBar_Lbl.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             KilosBar_Lbl.AutoSize = true;
             KilosBar_Lbl.BackColor = Color.Transparent;
-            KilosBar_Lbl.Location = new Point(174, 402);
-            KilosBar_Lbl.MinimumSize = new Size(36, 15);
+            KilosBar_Lbl.Location = new Point(199, 536);
+            KilosBar_Lbl.MinimumSize = new Size(41, 20);
             KilosBar_Lbl.Name = "KilosBar_Lbl";
-            KilosBar_Lbl.Size = new Size(36, 15);
+            KilosBar_Lbl.Size = new Size(41, 20);
             KilosBar_Lbl.TabIndex = 12;
             KilosBar_Lbl.Text = "0";
             KilosBar_Lbl.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // historialToolStripMenuItem
+            // cb_Ayer
             // 
-            historialToolStripMenuItem.Name = "historialToolStripMenuItem";
-            historialToolStripMenuItem.Size = new Size(180, 22);
-            historialToolStripMenuItem.Text = "Historial";
-            historialToolStripMenuItem.Click += historialToolStripMenuItem_Click;
+            cb_Ayer.AutoSize = true;
+            cb_Ayer.Location = new Point(365, 352);
+            cb_Ayer.Name = "cb_Ayer";
+            cb_Ayer.Size = new Size(61, 24);
+            cb_Ayer.TabIndex = 13;
+            cb_Ayer.Text = "Ayer";
+            cb_Ayer.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(393, 423);
+            ClientSize = new Size(449, 564);
+            Controls.Add(cb_Ayer);
             Controls.Add(KilosBar_Lbl);
             Controls.Add(CaloriasBar_Lbl);
             Controls.Add(KilosMax_Bar_Lbl);
@@ -443,7 +450,6 @@
             Controls.Add(toolStrip1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(3, 2, 3, 2);
             MaximizeBox = false;
             Name = "Main";
             SizeGripStyle = SizeGripStyle.Hide;
@@ -459,6 +465,7 @@
             Ejercicio_Group.ResumeLayout(false);
             Ejercicio_Group.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)Tiempo_Num).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ejercicioBindingSource1).EndInit();
             ((System.ComponentModel.ISupportInitialize)ejercicioBindingSource).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -502,5 +509,7 @@
         private ToolStripMenuItem piernasToolStripMenuItem;
         private ToolStripMenuItem espaldaToolStripMenuItem;
         private ToolStripMenuItem historialToolStripMenuItem;
+        private BindingSource ejercicioBindingSource1;
+        private CheckBox cb_Ayer;
     }
 }

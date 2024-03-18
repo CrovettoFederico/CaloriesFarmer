@@ -1,5 +1,7 @@
 ﻿using CaloriasFarm.Models;
 using CaloriasFarm.Utils.Context;
+using CaloriasFarm.Utils.Files;
+using CaloriasFarm.Utils.ModelHandlers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,14 @@ using System.Threading.Tasks;
 namespace CaloriasFarm.Controllers
 {
     public class MetasController : FormController {
-        public MetasController(Form form, EventHandler<Exception> ErrorHandler) : base(form, ErrorHandler){
+        private ABMObjetos _HistorialHandler { get; set; }
+        private List<DiaHistorial> Historial { get; set; }
+
+        public MetasController(Form form, EventHandler<Exception> ErrorHandler, ABMObjetos historialHandler = null) : base(form, ErrorHandler){
+            if (historialHandler != null)
+                _HistorialHandler = historialHandler;
+            else
+                _HistorialHandler = new DiaHistorialHandler(new JsonHandler());
         }
 
         public void IniciarPrograma() {
@@ -35,7 +44,7 @@ namespace CaloriasFarm.Controllers
             return true;
         }        
 
-        public bool ActualizarCalorias(int Calorias) {
+        public bool AgregarCalorias(int Calorias, string Causa, DateTime Dia) {
             try {
                 Context.Metas.ActualCalorias += Calorias;
                 if (Context.Metas.ActualCalorias >= 7700) {
@@ -43,11 +52,33 @@ namespace CaloriasFarm.Controllers
                     Context.Metas.ActualKilos++;
                 }
                 Context.GuardarContext();
+                GuardarHistorial(Calorias, Causa, Dia);
+
             }catch (Exception ex) {
                 ExceptionHandler.Invoke(null, new Exception("Error al Actualizar Calorias.", ex));
                 return false;
             }
             return true;
+        }
+
+        private void GuardarHistorial(int Calorias, string Causa, DateTime Dia) {
+            if (Historial == null)
+                Historial = (List<DiaHistorial>)_HistorialHandler.Obtener();
+
+            DiaHistorial DiaARegistrar = Historial.FirstOrDefault(h=> h.Dia.ToShortDateString() == Dia.ToShortDateString());
+            if (DiaARegistrar == null) {
+                DiaARegistrar = new DiaHistorial() {
+                    Dia = Dia,
+                    CausaYCaloriasList = new Dictionary<string, int>() { { Causa, Calorias } }
+                };
+
+                Historial.Add(DiaARegistrar);
+            }
+            else
+                DiaARegistrar.CausaYCaloriasList.Add(Causa, Calorias);
+
+            _HistorialHandler.Guardar(Historial);
+
         }
     }
 }

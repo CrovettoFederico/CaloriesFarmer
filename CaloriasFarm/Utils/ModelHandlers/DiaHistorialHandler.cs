@@ -7,11 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CaloriasFarm.Utils.ModelHandlers {
-    internal class DiaHistorialHandlers : ABMObjetosDesdeArchivo {
+    internal class DiaHistorialHandler : ABMObjetosDesdeArchivo {
         internal override FileHandler _FileHandler { get; set; }
-        private readonly string JsonFilePath = Directory.GetCurrentDirectory() + "\\Historial.json";
+        private readonly string JsonFilePath = Directory.GetCurrentDirectory() + "\\Files\\Historial.json";
 
-        public DiaHistorialHandlers(FileHandler fileHandler) {
+        public DiaHistorialHandler(FileHandler fileHandler) {
             _FileHandler = fileHandler;
         }
 

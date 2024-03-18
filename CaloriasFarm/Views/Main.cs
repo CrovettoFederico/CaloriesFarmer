@@ -12,9 +12,10 @@ namespace CaloriasFarm {
         private Point StartingPos = new Point(12, 45);
         private SetearMetas MetasForm;
         private ABMEjercicios ABMForm;
-        private MetasController Controller;
         private CargarDiaDeGym DiaGymForm;
         private HistorialDeCargaCalorias HistorialForm;
+
+        private MetasController Controller;
 
 
         public Main() {
@@ -33,6 +34,7 @@ namespace CaloriasFarm {
 
             MetasForm = new SetearMetas();
             ABMForm = new ABMEjercicios();
+
         }
 
         private void RefrescarVista() {
@@ -79,11 +81,11 @@ namespace CaloriasFarm {
         }
 
         private void Añadir_Ejercicio_Btn_Click(object sender, EventArgs e) {
-            ActualizarCalorias(Decimal.ToInt32(Decimal.Parse(GastoTotal_Txt.Text)));
+            ActualizarCalorias(Decimal.ToInt32(Decimal.Parse(GastoTotal_Txt.Text)), ((Ejercicio)Ejercicio_Cmb.SelectedItem).Nombre);
         }
 
         private void Añadir_Btn_Click(object sender, EventArgs e) {
-            ActualizarCalorias((int)Calorias_Num.Value);
+            ActualizarCalorias((int)Calorias_Num.Value, "General");
         }
 
         private void SetearBarras() {
@@ -100,22 +102,21 @@ namespace CaloriasFarm {
             KilosBar_Lbl.Text = Context.Metas.ActualKilos.ToString();
         }
 
-        private void ActualizarCalorias(int Calorias) {
-
-            Controller.ActualizarCalorias(Calorias);
+        private void ActualizarCalorias(int Calorias, string Causa) {
+            DateTime Dia = cb_Ayer.Checked ? DateTime.Now.AddDays(-1) : DateTime.Now;
+            Controller.AgregarCalorias(Calorias, Causa, Dia);
             SetearBarras();
-
         }
 
         private void Calorias_Num_KeyPress(object sender, KeyPressEventArgs e) {
             if (e.KeyChar == (char)13) {
-                ActualizarCalorias((int)Calorias_Num.Value);
+                ActualizarCalorias((int)Calorias_Num.Value, "General");
             }
         }
 
         private void Tiempo_Num_KeyPress(object sender, KeyPressEventArgs e) {
             if (e.KeyChar == (char)13) {
-                ActualizarCalorias(Decimal.ToInt32(Decimal.Parse(GastoTotal_Txt.Text)));
+                ActualizarCalorias(Decimal.ToInt32(Decimal.Parse(GastoTotal_Txt.Text)), ((Ejercicio)Ejercicio_Cmb.SelectedItem).Nombre);
             }
         }
 
@@ -129,7 +130,7 @@ namespace CaloriasFarm {
         }
 
         private void SetearMetas_Btn_Click(object sender, EventArgs e) {
-           MetasForm = (SetearMetas)ShowForm<SetearMetas>(MetasForm);
+            MetasForm = (SetearMetas)ShowForm<SetearMetas>(MetasForm);
         }
 
         private void Main_MouseClick(object sender, MouseEventArgs e) {
@@ -161,7 +162,7 @@ namespace CaloriasFarm {
         }
 
         private Form ShowForm<T>(Form form, object Args = null) {
-            if (form == null || form.IsDisposed) 
+            if (form == null || form.IsDisposed)
                 form = Args != null ? (Form)Activator.CreateInstance(typeof(T), Args) : (Form)Activator.CreateInstance(typeof(T));
             form.Show();
             form.Select();
@@ -170,7 +171,7 @@ namespace CaloriasFarm {
         }
 
         private void historialToolStripMenuItem_Click(object sender, EventArgs e) {
-            HistorialForm = (HistorialDeCargaCalorias) ShowForm<HistorialDeCargaCalorias>(HistorialForm);            
+            HistorialForm = (HistorialDeCargaCalorias)ShowForm<HistorialDeCargaCalorias>(HistorialForm);
         }
     }
 }

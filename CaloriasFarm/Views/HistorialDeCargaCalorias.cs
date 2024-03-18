@@ -16,20 +16,21 @@ namespace CaloriasFarm.Views {
     public partial class HistorialDeCargaCalorias : Form {
         HistorialDeCargaCaloriasController Controller { get; set; }
 
+        private readonly int CalendarWidth = 290;
+
         public HistorialDeCargaCalorias() {
             InitializeComponent();
-            lbl_TituloDiaHistorial.Text = string.Empty;
             this.Controller = new HistorialDeCargaCaloriasController(this, ErrorHandler.OnError);
             Historial_Total.lbl_Causa.Text = "Total: ";
             Historial_Total.lbl_Calorias.Text = string.Empty;
-
+            CargarDiaHistorial(Calendar_Historial.SelectionStart);
         }
 
-        private void Calendar_Historial_DateChanged(object sender, DateRangeEventArgs e) {
-            string Dia = e.Start.ToString("dddd dd-MM-yyyy");
-            lbl_TituloDiaHistorial.Text = Dia.Substring(0, 1).ToUpper() + Dia.Substring(1);
+        private void CargarDiaHistorial(DateTime Dia) {
+            string Diastr = Dia.ToString("dddd dd-MM-yyyy");
+            lbl_TituloDiaHistorial.Text = Diastr.Substring(0, 1).ToUpper() + Diastr.Substring(1);
 
-            var diaHistorial = Controller.ObtenerDia(e.Start);
+            var diaHistorial = Controller.ObtenerDia(Dia);
             panel_ContenedorHistorial.Controls.Clear();
             int TotalCalorias = 0;
             foreach (var item in diaHistorial.CausaYCaloriasList) {
@@ -45,8 +46,12 @@ namespace CaloriasFarm.Views {
             Historial_Total.lbl_Calorias.Text = TotalCalorias.ToString();
         }
 
+        private void Calendar_Historial_DateChanged(object sender, DateRangeEventArgs e) {
+            CargarDiaHistorial(e.Start);
+        }
+
         private void ReposicionarTituloDia(Label TituloCambiado) {
-            var OffSetIzquierdoDesdeForm = Calendar_Historial.Width + Calendar_Historial.Location.X;
+            var OffSetIzquierdoDesdeForm = CalendarWidth + Calendar_Historial.Location.X;
             var AnchoTotalDisponible = this.ClientSize.Width - OffSetIzquierdoDesdeForm;
             var AnchoLbl = TituloCambiado.Size.Width;
             var Margen = (AnchoTotalDisponible - AnchoLbl) / 2;

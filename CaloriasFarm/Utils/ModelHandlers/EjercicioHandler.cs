@@ -11,7 +11,7 @@ namespace CaloriasFarm.Utils.ModelHandlers
     public class EjercicioHandler : ABMObjetosDesdeArchivo {
         internal override FileHandler _FileHandler { get; set; }
 
-        private static string EjercicioJsonFile = Directory.GetCurrentDirectory() + "\\Ejercicios.json";
+        private static string EjercicioJsonFile = Directory.GetCurrentDirectory() + "\\Files\\Ejercicios.json";
 
         public EjercicioHandler(FileHandler ejercicioHandler) {            
                 _FileHandler = ejercicioHandler;

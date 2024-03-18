@@ -6,26 +6,36 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <ApplicationIcon>Utils\Attack.ico</ApplicationIcon>
+    <ApplicationIcon>Files\Attack.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Ejercicios.json" />
+    <None Remove="Files\RutinaGym.xlsx" />
+    <None Remove="Files\save-file.png" />
     <None Remove="Historial.json" />
     <None Remove="Metas.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Ejercicios.json">
+    <Content Include="Files\Ejercicios.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Historial.json">
+    <Content Include="Files\Historial.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Metas.json">
+    <Content Include="Files\Metas.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Utils\Attack.ico" />
+    <Content Include="Files\Attack.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Files\RutinaGym.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Files\save-file.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -52,13 +62,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="RutinaGym.xlsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Utils\Attack.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Utils\save-file.png">
+    <None Update="Files\Attack.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

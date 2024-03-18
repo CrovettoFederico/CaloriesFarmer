@@ -19,6 +19,9 @@ namespace CaloriasFarm {
             InitializeComponent();
             Series.Add(this.Serie_1);
             this.lbl_EjercicioName.Text = EjercicioName;
+            for (int i = 0; i<3; i++) {
+                AgregarEspacioParaSerie();
+            }
         }
 
         private void but_mas_Click(object sender, EventArgs e) {

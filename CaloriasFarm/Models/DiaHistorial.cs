@@ -9,5 +9,9 @@ namespace CaloriasFarm.Models {
         public DateTime Dia { get; set; }
         public Dictionary<string,int>? CausaYCaloriasList { get; set; }
 
+        public DiaHistorial() {
+            CausaYCaloriasList = new Dictionary<string,int>();
+        }
+
     }
 }

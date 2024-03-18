@@ -1,4 +1,5 @@
-﻿using CaloriasFarm.Models;
+﻿using CaloriasFarm.ErrorsHandler;
+using CaloriasFarm.Models;
 using CaloriasFarm.Utils.Files;
 using CaloriasFarm.Utils.ModelHandlers;
 using System;
@@ -18,16 +19,28 @@ namespace CaloriasFarm.Controllers {
             if(historialHandler != null)
                 _HistorialHandler = historialHandler;
                 else
-            _HistorialHandler = new DiaHistorialHandlers(new JsonHandler());
+            _HistorialHandler = new DiaHistorialHandler(new JsonHandler());
 
-            Historial = (List<DiaHistorial>)_HistorialHandler.Obtener();
+            try {
+                Historial = (List<DiaHistorial>)_HistorialHandler.Obtener();
+            } catch (Exception ex){
+                ExceptionHandler.Invoke(this, new Exception("Error al obtener el historial. ", ex));
+            }
         }
 
         public DiaHistorial ObtenerDia(DateTime Fecha) {
-            DiaHistorial dia = Historial.FirstOrDefault(h => h.Dia.ToShortDateString() == Fecha.ToShortDateString())!;
-            if (dia == null)
-                dia = new DiaHistorial() {CausaYCaloriasList = new Dictionary<string, int>() };
+            DiaHistorial dia;
+            try {
+                dia = Historial.FirstOrDefault(h => h.Dia.ToShortDateString() == Fecha.ToShortDateString())!;
+                if (dia == null)
+                    dia = new DiaHistorial() { CausaYCaloriasList = new Dictionary<string, int>() };
+                
+            } catch (Exception ex) {
+                ExceptionHandler.Invoke(this, new Exception("Error al obtener el dia "+ Fecha.ToShortDateString(), ex));
+                dia = new DiaHistorial() { CausaYCaloriasList = new Dictionary<string, int>() };
+            }
             return dia;
+
         }
         
 
