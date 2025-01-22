@@ -25,6 +25,7 @@ namespace CaloriasFarm.Controllers {
                 Historial = (List<DiaHistorial>)_HistorialHandler.Obtener();
             } catch (Exception ex){
                 ExceptionHandler.Invoke(this, new Exception("Error al obtener el historial. ", ex));
+                Historial = new List<DiaHistorial>();
             }
         }
 
